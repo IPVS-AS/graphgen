@@ -17,17 +17,17 @@ Each active node continuously goes through three consecutive decisions: terminat
 
 In *termination*, each node makes a binary choice whether to be active and proceed with the other two decisions.
 When a node decides not to be active anymore, it is no longer processed, i.e., the generation of new outgoing edges ends for this inactive node.
-The probability for termination, i.e., for a node deciding to be inactive, is calculated with $max(0.2, \sqrt{{new\_nodes}/{max\_new\_nodes}})$, where ${new\_nodes}$ is the number of newly created nodes for this graph so far and ${max\_new\_nodes}$ is a constant limiting the maximum size of a graph.
+The probability for termination, i.e., for a node deciding to be inactive, is calculated with `max(0.2, \sqrt{{new_nodes}/{max_new_nodes}})`, where `new_nodes` is the number of newly created nodes for this graph so far and `max_new_nodes` is a constant limiting the maximum size of a graph.
 Termination limits the size of a graph and depends on the number of generated nodes.
-The probability of termination is at least $20\%$.
+The probability of termination is at least 20%.
 Its gradient increases rapidly at the beginning and decreases as the number of created nodes increases, similar to a logistic function.
 This results in longer graphs.
 Termination and splitting influence how long paths in our graph can get and how often a graph branches out.
 The choice of probabilities here favors longer, less broad graphs.
 
 In *splitting*, each active node decides on the number of outgoing edges that are subsequently created for this node.
-We draw the number of edges from a folded normal distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$ and subsequently add $1$ to this number of edges.
-This makes one outgoing edge the most likely case, with decreasing probabilities for higher numbers of edges, while the maximum number of edges per active node is $5$.
+We draw the number of edges from a folded normal distribution with mean `\mu = 0` and standard deviation `\sigma = 1` and subsequently add 1 to this number of edges.
+This makes one outgoing edge the most likely case, with decreasing probabilities for higher numbers of edges, while the maximum number of edges per active node is 5.
 
 In *growth*, each node decides which new node to create for each previously created outgoing edge.
 If the currently growing node is a data node, we create a new activity node.
